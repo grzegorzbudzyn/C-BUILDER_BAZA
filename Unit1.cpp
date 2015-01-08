@@ -60,6 +60,43 @@ void __fastcall DeleteRow(TStringGrid *Grid, int ARow)
  Grid->SetFocus();
 }
 //--------------------
+// USUWANIE KOLUMNY Z TABELI
+void __fastcall DeleteCol(TStringGrid *Grid, int ACol)
+{
+ if(ACol < Grid->FixedCols)
+ {
+  Application->MessageBox("Nie wybrano kolumny do usuniêcia", "Usuwanie kolumny",
+  MB_OK | MB_ICONSTOP);
+  return;
+ }
+ if(Grid->ColCount == Grid->FixedCols + 1)
+ {
+  int id = Application->MessageBox("Conajmniej jedna kolumna (nie licz¹c nag³ówka) musi pozostaæ w tabeli. "
+           "Czy chcesz wyczyœciæ zawartoœæ komórek w tej kolumnie?", "Usuwanie kolumny", MB_YESNO | MB_ICONQUESTION);
+  if(id == ID_YES)
+   for(int y = 0; y < Grid->RowCount; y++)
+    Grid->Cells[ACol][y] = "";
+  return;
+ }
+
+ int id = Application->MessageBox("Czy na pewno chcesz usun¹æ wybran¹ kolumnê?\nOperacji nie bêdzie mo¿na cofn¹æ!",
+         "Usuwanie kolumny", MB_YESNO | MB_ICONQUESTION);
+ if(id == ID_YES)
+ {
+  for(int i = ACol; i <= Grid->ColCount - 1; i++)
+  {
+   for(int y = 0; y < Grid->RowCount; y++)
+   {
+    Grid->Cells[i][y] = Grid->Cells[i + 1][y];
+    Grid->ColWidths[i] = Grid->ColWidths[i + 1];
+    Grid->Cells[i + 1][y] = "";
+   }
+  }
+  Grid->ColCount--;
+ }
+ Grid->SetFocus();
+}
+//--------------------
 void __fastcall TForm1::UsuWiersz1Click(TObject *Sender)
 {
     DeleteRow(StringGrid1, StringGrid1->Row);
@@ -67,12 +104,12 @@ void __fastcall TForm1::UsuWiersz1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::DodajKolumn1Click(TObject *Sender)
 {
-      StringGrid1->ColCount++;  
+      StringGrid1->ColCount++;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::UsuKolumn1Click(TObject *Sender)
 {
-         StringGrid1->ColCount--;
+         DeleteCol(StringGrid1, StringGrid1->Col);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::NagwkiKolumn1Click(TObject *Sender)

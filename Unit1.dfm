@@ -25,7 +25,7 @@ object Form1: TForm1
     Height = 380
     ColCount = 2
     FixedCols = 0
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing]
     TabOrder = 0
   end
   object Edit1: TEdit
