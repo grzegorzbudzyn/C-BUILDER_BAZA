@@ -49,6 +49,8 @@ __published:	// IDE-managed Components
         void __fastcall Zapiszjako1Click(TObject *Sender);
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
         void __fastcall WyszukajClick(TObject *Sender);
+        void __fastcall StringGrid1SetEditText(TObject *Sender, int ACol,
+          int ARow, const AnsiString Value);
         
 private:	// User declarations
         String FileSaveName;

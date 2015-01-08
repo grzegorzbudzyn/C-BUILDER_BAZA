@@ -27,6 +27,7 @@ object Form1: TForm1
     FixedCols = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing]
     TabOrder = 0
+    OnSetEditText = StringGrid1SetEditText
   end
   object Edit1: TEdit
     Left = 8
