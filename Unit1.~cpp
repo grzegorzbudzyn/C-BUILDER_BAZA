@@ -24,9 +24,45 @@ void __fastcall TForm1::DodajWiersz1Click(TObject *Sender)
     StringGrid1->RowCount++;
 }
 //---------------------------------------------------------------------------
+//usuwanie wiersza
+void __fastcall DeleteRow(TStringGrid *Grid, int ARow)
+{
+ if(ARow < Grid->FixedRows)
+ {
+  Application->MessageBox("Nie wybrano wiersza do usuniêcia", "Usuwanie wiersza", MB_OK | MB_ICONSTOP);
+  return;
+ }
+ if(Grid->RowCount == Grid->FixedRows + 1)
+ {
+  int id = Application->MessageBox("Conajmniej jeden wiersz (nie licz¹c nag³ówka) musi pozostaæ w tabeli. "
+
+           "Czy chcesz wyczyœciæ zawartoœæ komórek w tym wierszu?", "Usuwanie wiersza", MB_YESNO | MB_ICONQUESTION);
+  if(id == ID_YES)
+   for(int y = 0; y < Grid->ColCount; y++)
+    Grid->Cells[y][ARow] = "";
+  return;
+ }
+
+ int id = Application->MessageBox("Czy na pewno chcesz usun¹æ wybrany wiersz?\nOperacji nie bêdzie mo¿na cofn¹æ!",
+          "Usuwanie wiersza", MB_YESNO | MB_ICONQUESTION);
+ if(id == ID_YES)
+ {
+  for(int i = ARow; i <= Grid->RowCount - 1; i++)
+  {
+   for(int y = 0; y < Grid->ColCount; y++)
+   {
+    Grid->Cells[y][i] = Grid->Cells[y][i + 1];
+    Grid->Cells[y][i + 1] = "";
+   }
+  }
+  Grid->RowCount--;
+ }
+ Grid->SetFocus();
+}
+//--------------------
 void __fastcall TForm1::UsuWiersz1Click(TObject *Sender)
 {
-    StringGrid1->RowCount--;    
+    DeleteRow(StringGrid1, StringGrid1->Row);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::DodajKolumn1Click(TObject *Sender)
@@ -92,10 +128,62 @@ void __fastcall TForm1::Zapiszjako1Click(TObject *Sender)
 
   FileSaveName = SaveDialog1->FileName;  
 }
+//wyszukiwanie
+struct FindCells
+{
+ int Row;
+ int Col;
+};
+FindCells FindInGrid(TStringGrid *Grid, String tekst)
+{
+ FindCells fc;
+ fc.Col = -1;
+ fc.Row = -1;
+
+ static int row = Grid->FixedRows;
+ if(row >= Grid->RowCount - 1)
+ row = Grid->FixedRows;
+
+ for(int i = Grid->FixedCols; i < Grid->ColCount; i++)
+ {
+  for(int j = row; j < Grid->RowCount; j++)
+  {
+   String find = Grid->Cells[i][j];
+   int x = find.Pos(tekst);
+   if(x > 0)
+   {
+    fc.Col = i;
+    fc.Row = j;
+    row = j + 1;
+    return fc;
+   }
+  }
+ }
+ row = Grid->FixedRows;
+ return fc;
+}
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
 {
-       delete Baza; 
+       delete Baza;
 }
 
+//przycisk wyszukania
+void __fastcall TForm1::WyszukajClick(TObject *Sender)
+{
+    FindCells fc;
+ fc = FindInGrid(StringGrid1, Edit1->Text);
+ if(fc.Col < 0)
+ {
+  Application->MessageBox(("Nie mo¿na odnaleŸæ „" + Edit1->Text + "”").c_str(),
+   "ZnajdŸ", MB_OK | MB_ICONINFORMATION);
+  return;
+ }
+ StringGrid1->Col = fc.Col;
+ StringGrid1->Row = fc.Row;
+ StringGrid1->SetFocus();
+
+}
+
+//---------------------------------------------------------------------------
 

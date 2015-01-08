@@ -34,6 +34,8 @@ __published:	// IDE-managed Components
         TSaveDialog *SaveDialog1;
         TOpenDialog *OpenDialog1;
         TStringGrid *StringGrid1;
+        TEdit *Edit1;
+        TButton *Wyszukaj;
         void __fastcall DodajWiersz1Click(TObject *Sender);
         void __fastcall UsuWiersz1Click(TObject *Sender);
         void __fastcall DodajKolumn1Click(TObject *Sender);
@@ -46,6 +48,7 @@ __published:	// IDE-managed Components
         void __fastcall Zapisz1Click(TObject *Sender);
         void __fastcall Zapiszjako1Click(TObject *Sender);
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+        void __fastcall WyszukajClick(TObject *Sender);
         
 private:	// User declarations
         String FileSaveName;
