@@ -233,8 +233,10 @@ void __fastcall TForm1::WyszukajClick(TObject *Sender)
 void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol,
       int ARow, const AnsiString Value)
 {
- if(!StringGrid1->Cells[ACol][ARow].IsEmpty())
-  StringGrid1->ColWidths[ACol] = 5 + StringGrid1->Canvas->TextWidth(StringGrid1->Cells[ACol][ARow]);        
-}
+ if(!StringGrid1->Cells[ACol][ARow].IsEmpty())  //jesli nei jest pusty
+        if( StringGrid1->ColWidths[ACol] < (5 + StringGrid1->Canvas->TextWidth(StringGrid1->Cells[ACol][ARow]))) //jesli nei jest mniejszy od poprzedniej wartosci
+                {
+                        StringGrid1->ColWidths[ACol] = 5 + StringGrid1->Canvas->TextWidth(StringGrid1->Cells[ACol][ARow]);
+}               }
 //---------------------------------------------------------------------------
 
