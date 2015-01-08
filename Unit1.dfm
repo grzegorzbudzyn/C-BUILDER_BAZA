@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 45
-  Top = 152
+  Left = 660
+  Top = 176
   ActiveControl = StringGrid1
   BorderStyle = bsSingle
   Caption = 'Form1'

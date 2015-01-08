@@ -86,7 +86,11 @@ void __fastcall TForm1::NagwkiKolumn1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Nowy1Click(TObject *Sender)
 {
-
+if( Application->MessageBox(
+			"Czy jestes pewien? Nie zapisane dane zostan¹ bezpowrotnie utracone!",
+			"Ostrze¿enie",
+			MB_OKCANCEL | MB_ICONQUESTION) == IDOK )
+                        {
 Baza->RefreshBase();
 
   for(int i = 0; i < StringGrid1->RowCount; i++){
@@ -98,6 +102,7 @@ Baza->RefreshBase();
   StringGrid1->RowCount = 2;
   StringGrid1->ColCount = 2;
   FileSaveName = "";
+  }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Otwrz1Click(TObject *Sender)
