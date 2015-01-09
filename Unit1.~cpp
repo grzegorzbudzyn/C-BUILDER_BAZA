@@ -136,7 +136,7 @@ Baza->RefreshBase();
                                }
                                  }
 
-  StringGrid1->RowCount = 2;
+  StringGrid1->RowCount = 4;
   StringGrid1->ColCount = 2;
   FileSaveName = "";
   }
@@ -228,8 +228,7 @@ void __fastcall TForm1::WyszukajClick(TObject *Sender)
 
 }
 
-//---------------------------------------------------------------------------
-
+//---------------------------------------------------------------
 void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol,
       int ARow, const AnsiString Value)
 {
@@ -239,4 +238,23 @@ void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol,
                         StringGrid1->ColWidths[ACol] = 5 + StringGrid1->Canvas->TextWidth(StringGrid1->Cells[ACol][ARow]);
 }               }
 //---------------------------------------------------------------------------
+//SORTOWANIE B¹belkowe!!!
 
+void __fastcall sortuj(TStringGrid Grid,int kolumna)
+{
+  AnsiString temp;
+
+  for(int j=Grid->RowCount-1; j>0; j--)
+    for (int i=0; i<j; i++)
+      if (Grid->Cells[kolumna][i]>Grid->Cells[kolumna][i+1])
+        {
+        //
+        //        temp=Grid->Cells[FixedRows+i][a];
+        //        Grid->Cells[FixedRows+i][a]=Grid->Cells[FixedRows+i][b];
+        //        Grid->Cells[FixedRows+i][b]=temp;
+                temp = Tabela->Rows[i]->GetText();
+                Tabela->Rows[i]->SetText(Tabela->Rows[j]->GetText());
+                Tabela->Rows[j]->SetText(temp.c_str());
+        }
+}
+//sortowanie end
