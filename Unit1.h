@@ -29,13 +29,15 @@ __published:	// IDE-managed Components
         TMenuItem *DodajKolumn1;
         TMenuItem *UsuKolumn1;
         TMenuItem *NagwkiKolumn1;
-        TMenuItem *DodajNotatk1;
         
         TSaveDialog *SaveDialog1;
         TOpenDialog *OpenDialog1;
         TStringGrid *StringGrid1;
         TEdit *Edit1;
         TButton *Wyszukaj;
+        TComboBox *ComboBox1;
+        TLabel *Label1;
+
         void __fastcall DodajWiersz1Click(TObject *Sender);
         void __fastcall UsuWiersz1Click(TObject *Sender);
         void __fastcall DodajKolumn1Click(TObject *Sender);
@@ -51,7 +53,11 @@ __published:	// IDE-managed Components
         void __fastcall WyszukajClick(TObject *Sender);
         void __fastcall StringGrid1SetEditText(TObject *Sender, int ACol,
           int ARow, const AnsiString Value);
+        void __fastcall ComboBox1DropDown(TObject *Sender);
+        void __fastcall ComboBox1Change(TObject *Sender);
         
+        
+
 private:	// User declarations
         String FileSaveName;
         

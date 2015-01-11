@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 660
-  Top = 176
+  Left = 375
+  Top = 166
   ActiveControl = StringGrid1
   BorderStyle = bsSingle
   Caption = 'Form1'
-  ClientHeight = 444
+  ClientHeight = 443
   ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,9 +20,9 @@ object Form1: TForm1
   TextHeight = 13
   object StringGrid1: TStringGrid
     Left = 8
-    Top = 40
+    Top = 64
     Width = 609
-    Height = 380
+    Height = 356
     ColCount = 2
     FixedCols = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing]
@@ -32,19 +32,30 @@ object Form1: TForm1
   object Edit1: TEdit
     Left = 8
     Top = 8
-    Width = 185
+    Width = 297
     Height = 21
     TabOrder = 1
     Text = 'Wyszukiwanie...'
   end
   object Wyszukaj: TButton
-    Left = 200
-    Top = 8
+    Left = 104
+    Top = 32
     Width = 105
     Height = 25
     Caption = 'Wyszukaj'
     TabOrder = 2
     OnClick = WyszukajClick
+  end
+  object ComboBox1: TComboBox
+    Left = 328
+    Top = 8
+    Width = 289
+    Height = 21
+    Style = csDropDownList
+    ItemHeight = 13
+    TabOrder = 3
+    OnChange = ComboBox1Change
+    OnDropDown = ComboBox1DropDown
   end
   object MainMenu1: TMainMenu
     Left = 520
@@ -89,9 +100,6 @@ object Form1: TForm1
       object NagwkiKolumn1: TMenuItem
         Caption = 'Nag'#322#243'wki Kolumn'
         OnClick = NagwkiKolumn1Click
-      end
-      object DodajNotatk1: TMenuItem
-        Caption = 'Dodaj Notatk'#281
       end
     end
   end
