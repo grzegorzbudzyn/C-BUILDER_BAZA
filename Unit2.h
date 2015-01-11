@@ -19,8 +19,11 @@ __published:	// IDE-managed Components
         void __fastcall FormShow(TObject *Sender);
         void __fastcall Button1Click(TObject *Sender);
         void __fastcall Button2Click(TObject *Sender);
-       
+        void __fastcall StringGrid1SetEditText(TObject *Sender, int ACol,
+          int ARow, const AnsiString Value);
+
 private:	// User declarations
+        
 public:		// User declarations
         __fastcall TForm2(TComponent* Owner);
 };

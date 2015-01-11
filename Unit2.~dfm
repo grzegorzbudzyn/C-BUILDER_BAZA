@@ -17,25 +17,26 @@ object Form2: TForm2
   PixelsPerInch = 96
   TextHeight = 13
   object StringGrid1: TStringGrid
-    Left = 78
-    Top = 24
-    Width = 296
-    Height = 120
-    ColCount = 1
-    DefaultColWidth = 270
+    Left = 6
+    Top = 8
+    Width = 443
+    Height = 137
+    ColCount = 2
+    DefaultColWidth = 210
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
     TabOrder = 0
     OnClick = FormShow
+    OnSetEditText = StringGrid1SetEditText
   end
   object Button1: TButton
     Left = 77
     Top = 150
     Width = 75
     Height = 25
-    Caption = 'OK'
+    Caption = 'Zastosuj'
     TabOrder = 1
     OnClick = Button1Click
   end
