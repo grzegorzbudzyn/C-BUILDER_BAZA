@@ -244,7 +244,7 @@ void __fastcall sortuj(TStringGrid *Grid,int kolumna)
 {
   AnsiString temp;
 
-  for(int j=Grid->RowCount-1; j>0; j--)
+  for(int j=Grid->RowCount-1; j>1; j--)
     for (int i=1; i<j; i++)
       if (Grid->Cells[kolumna][i]>Grid->Cells[kolumna][i+1])
         {
@@ -257,6 +257,11 @@ void __fastcall sortuj(TStringGrid *Grid,int kolumna)
                 Grid->Rows[j]->SetText(temp.c_str());
         }
 }
+void __fastcall TForm1::ComboBox1Change(TObject *Sender)
+{
+        sortuj(StringGrid1,ComboBox1->ItemIndex);
+}
+//---------------------------------------------------------------------------
 //sortowanie end
 
 //Wyswietlanie Comboboxa--------------------------------------------------------------
@@ -271,9 +276,5 @@ for(int i = 0; i < StringGrid1->ColCount; i++)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::ComboBox1Change(TObject *Sender)
-{
-        sortuj(StringGrid1,ComboBox1->ItemIndex);
-}
-//---------------------------------------------------------------------------
+
 

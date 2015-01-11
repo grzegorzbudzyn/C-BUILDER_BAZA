@@ -9,7 +9,6 @@
 TDataBase::TDataBase()
 {   // konstruktor
  Memo = new TStringList;
- Bitmap = new TStringList;
 }
 //---------------------------------------------------------------------------
 TDataBase::~TDataBase()
@@ -57,9 +56,7 @@ void TDataBase::SaveToFile(String FileName, TStringGrid *Grid)
  for(int i = 0; i < Memo->Count; i++){
       Lista->Add(Memo->Strings[i]);
                                      }
- for(int i = 0; i < Bitmap->Count; i++){
-      Lista->Add(Bitmap->Strings[i]);
-                                       }
+
  Lista->Add(SetColSize(Grid->ColCount, Grid));
  Lista->SaveToFile(FileName);
  Lista->Free();
@@ -116,11 +113,9 @@ void TDataBase::LoadFromFile(String FileName, TStringGrid *Grid)
   else {
         if(Lista->Strings[i].SubString(1, 6) == "[MEMO]")
             Memo->Add(Lista->Strings[i]);
-        if(Lista->Strings[i].SubString(1, 9) == "[BITMAPA]")
-            Bitmap->Add(Lista->Strings[i]);
        }
                                       }
- Bitmap->SaveToFile("bitmapa.txt");
+
  Lista->Free();
 }
 //---------------------------------------------------------------------------
@@ -164,7 +159,7 @@ memo TDataBase::GetMemo(int number)
                     }
                                      }
  if(z == number){
- JestNotatka = true;
+ 
  MemoCount = WierszeMemo(temp);
 
  for(int i = 0; i < MemoCount; i++){
@@ -172,42 +167,11 @@ memo TDataBase::GetMemo(int number)
      zwrot.A[i] = (temp.SubString(x + 1, 1000));
      temp = temp.Delete(x, 1000);
                                            }
-               } else JestNotatka = false;
+               }
  return zwrot;
 }
 //---------------------------------------------------------------------------
-void TDataBase::SetBitmap(String FileName, int number)
-{
- String temp = "[BITMAPA]" + IntToStr(number) + "#";
- int length = temp.Length();
- bool test = false;
- for(int i = 0; i < Bitmap->Count; i++){
- if(Bitmap->Strings[i].SubString(1, length) == temp){
-    Bitmap->Strings[i] = temp + FileName;
-    test = true;
-    break;
-                                                    }
-                                     }
- if(!test)Bitmap->Add(temp + FileName);
-}
-//---------------------------------------------------------------------------
-String TDataBase::GetBitmap(int number)
-{
- String temp = "";
- int z;
 
- for(int i = 0; i < Bitmap->Count; i++){
-     temp = Bitmap->Strings[i].SubString(10, 300);
-     int x = temp.LastDelimiter("#");
-     try{z = (temp.SubString(1, x - 1)).ToInt();}catch(...){z = 0;}
-     if(z == number){
-     temp = temp.Delete(1, x);
-     return temp;
-                    }
-                                     }
- return temp;
-}
-//---------------------------------------------------------------------------
 void TDataBase::RefreshBase(void)
 {
  Bitmap->Clear();

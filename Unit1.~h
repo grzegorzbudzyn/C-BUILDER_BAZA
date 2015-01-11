@@ -36,6 +36,7 @@ __published:	// IDE-managed Components
         TEdit *Edit1;
         TButton *Wyszukaj;
         TComboBox *ComboBox1;
+        TLabel *Label1;
 
         void __fastcall DodajWiersz1Click(TObject *Sender);
         void __fastcall UsuWiersz1Click(TObject *Sender);

@@ -29,7 +29,7 @@ object Form1: TForm1
     Left = 8
     Top = 64
     Width = 609
-    Height = 356
+    Height = 369
     ColCount = 2
     FixedCols = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing]
