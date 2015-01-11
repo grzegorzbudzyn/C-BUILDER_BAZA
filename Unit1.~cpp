@@ -239,24 +239,65 @@ void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol,
 }               }
 //---------------------------------------------------------------------------
 //SORTOWANIE B¹belkowe!!!
-
-void __fastcall sortuj(TStringGrid *Grid,int kolumna)
+int __fastcall CustomSortIncrease(TStringList *Lista, int idx1, int idx2)
 {
-  AnsiString temp;
-
-  for(int j=Grid->RowCount-1; j>1; j--)
-    for (int i=1; i<j; i++)
-      if (Grid->Cells[kolumna][i]>Grid->Cells[kolumna][i+1])
-        {
-        //
-        //        temp=Grid->Cells[FixedRows+i][a];
-        //        Grid->Cells[FixedRows+i][a]=Grid->Cells[FixedRows+i][b];
-        //        Grid->Cells[FixedRows+i][b]=temp;
-                temp = Grid->Rows[i]->GetText();
-                Grid->Rows[i]->SetText(Grid->Rows[j]->GetText());
-                Grid->Rows[j]->SetText(temp.c_str());
-        }
+ String cTemp1 = Lista->Strings[idx1];
+ String cTemp2 = Lista->Strings[idx2];
+ return CompareText(cTemp1, cTemp2);
 }
+
+void __fastcall sortuj(TStringGrid *Grid, int Col)
+{
+ TStringList *SortList = new TStringList;
+ String temp = "";
+
+ for(int i = Grid->FixedRows; i < Grid->RowCount; i++)
+ {
+  temp = Grid->Cells[Col][i];
+  if(temp.IsEmpty()) temp = " ";
+  for(int z = Grid->FixedCols; z <= Grid->ColCount; z++)
+  {
+   if(Grid->Cells[z][i].IsEmpty()) Grid->Cells[z][i] = " ";
+   if(z != Col)
+    temp = temp + "^" + Grid->Cells[z][i];
+  }
+  SortList->Add(temp.SubString(0, temp.Length() - 1));
+  temp = "";
+ }
+
+
+ SortList->CustomSort(CustomSortIncrease);
+
+ }
+ temp = "";
+ for(int i = 0; i < SortList->Count; i++)
+ {
+  temp = SortList->Strings[i];
+
+  int y = temp.Pos("^");
+  Grid->Cells[Col][i + 1] = temp.SubString(1, y - 1).Trim();
+  temp = temp.Delete(1, y);
+  int z;
+  for(z = Grid->FixedCols; z < Grid->ColCount; z++)
+  {
+   if(z != Col)
+   {
+    y = temp.Pos("^");
+    Grid->Cells[z][i + 1] = temp.SubString(1, y - 1).Trim();
+    temp = temp.Delete(1, y);
+   }
+  }
+  z++;
+  y = temp.Pos("^");
+  Grid->Cells[z][i + 1] = temp.SubString(1, y - 1).Trim();
+  temp = temp.Delete(1, y);
+ }
+
+ delete SortList;
+}                //temp = Grid->Rows[i]->GetText();
+                //Grid->Rows[i]->SetText(Grid->Rows[j]->GetText());
+                //Grid->Rows[j]->SetText(temp.c_str());
+
 void __fastcall TForm1::ComboBox1Change(TObject *Sender)
 {
         sortuj(StringGrid1,ComboBox1->ItemIndex);

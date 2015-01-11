@@ -32,6 +32,7 @@ object Form1: TForm1
     Height = 369
     ColCount = 2
     FixedCols = 0
+    FixedRows = 2
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing]
     TabOrder = 0
     OnSetEditText = StringGrid1SetEditText

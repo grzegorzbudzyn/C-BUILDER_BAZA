@@ -268,7 +268,7 @@ void __fastcall sortuj(TStringGrid *Grid, int Col)
 
  SortList->CustomSort(CustomSortIncrease);
 
- }
+
  temp = "";
  for(int i = 0; i < SortList->Count; i++)
  {
@@ -316,6 +316,5 @@ for(int i = 0; i < StringGrid1->ColCount; i++)
       }
 }
 //---------------------------------------------------------------------------
-
 
 

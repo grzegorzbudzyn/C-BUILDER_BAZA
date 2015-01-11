@@ -55,6 +55,7 @@ __published:	// IDE-managed Components
           int ARow, const AnsiString Value);
         void __fastcall ComboBox1DropDown(TObject *Sender);
         void __fastcall ComboBox1Change(TObject *Sender);
+
         
         
 
