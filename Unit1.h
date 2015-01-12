@@ -55,15 +55,19 @@ __published:	// IDE-managed Components
           int ARow, const AnsiString Value);
         void __fastcall ComboBox1DropDown(TObject *Sender);
         void __fastcall ComboBox1Change(TObject *Sender);
+        void __fastcall StringGrid1SelectCell(TObject *Sender, int ACol,
+          int ARow, bool &CanSelect);
+        
+
 
-        
-        
 
 private:	// User declarations
         String FileSaveName;
-        
+
 public:		// User declarations
         TDataBase *Baza;
+        int Akolumna;
+        int Awiersz;
         
         __fastcall TForm1(TComponent* Owner);
 };

@@ -63,6 +63,7 @@ void __fastcall TForm2::StringGrid1SetEditText(TObject *Sender, int ACol,
         {
                 Form1->StringGrid1->Cells[i][1] = StringGrid1->Cells[1][i];
         }
+        
 }
 //---------------------------------------------------------------------------
 

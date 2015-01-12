@@ -16,11 +16,25 @@ object Form2: TForm2
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 16
+    Top = 8
+    Width = 87
+    Height = 13
+    Caption = 'Nazwa nag'#322#243'wka:'
+  end
+  object Label2: TLabel
+    Left = 232
+    Top = 8
+    Width = 134
+    Height = 13
+    Caption = 'Typ nagl'#243'wka: tekst / liczba'
+  end
   object StringGrid1: TStringGrid
     Left = 6
-    Top = 8
+    Top = 32
     Width = 443
-    Height = 137
+    Height = 113
     ColCount = 2
     DefaultColWidth = 210
     FixedCols = 0

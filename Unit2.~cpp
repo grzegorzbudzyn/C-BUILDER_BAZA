@@ -63,19 +63,7 @@ void __fastcall TForm2::StringGrid1SetEditText(TObject *Sender, int ACol,
         {
                 Form1->StringGrid1->Cells[i][1] = StringGrid1->Cells[1][i];
         }
+        NoDigit(Edit1);
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::MoveEditor(void)
-{
- TRect Rect = StringGrid1->CellRect(StringGrid1->Col, StringGrid1->Row);
- int gWidth = StringGrid1->GridLineWidth;
 
- myPanel->Visible = false;
- myPanel->Top = Rect.Top + gWidth;
- myPanel->Left = Rect.Left + gWidth;
- myPanel->Height = (Rect.Bottom - Rect.Top) + 1;
- myPanel->Width = (Rect.Right - Rect.Left) + 1;
- myEditor->Width = myPanel->Width;
- myEditor->Height = myPanel->Height;
- myPanel->Visible = true;
-}

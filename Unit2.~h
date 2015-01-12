@@ -15,6 +15,8 @@ __published:	// IDE-managed Components
         TStringGrid *StringGrid1;
         TButton *Button1;
         TButton *Button2;
+        TLabel *Label1;
+        TLabel *Label2;
 
         void __fastcall FormShow(TObject *Sender);
         void __fastcall Button1Click(TObject *Sender);

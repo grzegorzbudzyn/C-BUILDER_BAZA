@@ -2,6 +2,7 @@
 
 #include <vcl.h>
 #pragma hdrstop
+#include <locale>
 
 #include "Unit1.h"
 #include "Unit2.h"
@@ -16,9 +17,34 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 {
   Baza = new TDataBase();
   FileSaveName = "";
+
+  
 }
 //---------------------------------------------------------------------------
-
+void Usun_liczby(int Akolumna,int Awiersz,TStringGrid *Grid)   //maska usuwajaca liczby
+{
+     if(Grid->Cells[Akolumna][1]=="tekst")
+        {
+                AnsiString tab[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+                AnsiString temp=Grid->Cells[Akolumna][Awiersz];
+                for(int i = 0; i < 10; i++)
+                        temp = StringReplace(temp, tab[i], "", TReplaceFlags() << rfReplaceAll);
+               Grid->Cells[Akolumna][Awiersz]=temp;
+               Grid->Perform(EM_SETSEL, temp.Length(), temp.Length());
+        }
+}
+void Usun_litery(int Akolumna,int Awiersz,TStringGrid *Grid)   //maska usuwajaca litery
+{
+     if(Grid->Cells[Akolumna][1]=="liczba")
+        {
+                AnsiString tab[] = {"A","•","B","C","∆","D","E"," ","F","G","H","I","J","K","L","£","M","N","—","O","”","P","R","S","å","T","U","W","Y","Z","è","Ø","a","π","b","Ê","c","d","e","Í","f","g","h","i","j","k","l","m","n","o","p","r","s","t","u","w","y","z"};
+                AnsiString temp=Grid->Cells[Akolumna][Awiersz];
+                for(int i = 0; i < 58; i++)
+                        temp = StringReplace(temp, tab[i], "", TReplaceFlags() << rfReplaceAll);
+               Grid->Cells[Akolumna][Awiersz]=temp;
+               Grid->Perform(EM_SETSEL, temp.Length(), temp.Length());
+        }
+}
 void __fastcall TForm1::DodajWiersz1Click(TObject *Sender)
 {
     StringGrid1->RowCount++;
@@ -155,17 +181,23 @@ void __fastcall TForm1::Otwrz1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Zapisz1Click(TObject *Sender)
 {
-            if(FileSaveName.IsEmpty())
-    {
-      if(SaveDialog1->Execute())
-        Baza->SaveToFile(SaveDialog1->FileName, StringGrid1);
-    }
-  else Baza->SaveToFile(FileSaveName, StringGrid1);
-  FileSaveName = SaveDialog1->FileName;
+Usun_liczby(Akolumna,Awiersz,StringGrid1);
+
+        if(FileSaveName.IsEmpty())
+        {
+                if(SaveDialog1->Execute())
+                Baza->SaveToFile(SaveDialog1->FileName, StringGrid1);
+        }
+        else
+        Baza->SaveToFile(FileSaveName, StringGrid1);
+        FileSaveName = SaveDialog1->FileName;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Zapiszjako1Click(TObject *Sender)
 {
+Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
+
         if(SaveDialog1->Execute())
     Baza->SaveToFile(SaveDialog1->FileName, StringGrid1);
 
@@ -232,11 +264,26 @@ void __fastcall TForm1::WyszukajClick(TObject *Sender)
 void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol,
       int ARow, const AnsiString Value)
 {
+
  if(!StringGrid1->Cells[ACol][ARow].IsEmpty())  //jesli nei jest pusty
         if( StringGrid1->ColWidths[ACol] < (5 + StringGrid1->Canvas->TextWidth(StringGrid1->Cells[ACol][ARow]))) //jesli nei jest mniejszy od poprzedniej wartosci
                 {
                         StringGrid1->ColWidths[ACol] = 5 + StringGrid1->Canvas->TextWidth(StringGrid1->Cells[ACol][ARow]);
-}               }
+                }
+
+
+        //StringGrid1->Cells[ACol][ARow]->Perform
+
+ //if(StringGrid1->Cells[ACol][1]=="liczba")
+ //       {
+ //               AnsiString tab[] = {"A","•","B","C","∆","D","E"," ","F","G","H","I","J","K","L","£","M","N","—","O","”","P","R","S","å","T","U","W","Y","Z","è","Ø"};
+ //               AnsiString temp;
+ //               for(int i = 0; i < 10; i++)
+ //                       temp = StringReplace(temp, tab[i], "", TReplaceFlags() << rfReplaceAll);
+ //               StringGrid1->Cells[ACol][ARow]=temp;
+ //       }
+
+ }
 //---------------------------------------------------------------------------
 //SORTOWANIE Bπbelkowe!!!
 int __fastcall CustomSortIncrease(TStringList *Lista, int idx1, int idx2)
@@ -268,7 +315,7 @@ void __fastcall sortuj(TStringGrid *Grid, int Col)
 
  SortList->CustomSort(CustomSortIncrease);
 
- }
+
  temp = "";
  for(int i = 0; i < SortList->Count; i++)
  {
@@ -317,5 +364,18 @@ for(int i = 0; i < StringGrid1->ColCount; i++)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TForm1::StringGrid1SelectCell(TObject *Sender, int ACol,
+      int ARow, bool &CanSelect)
+{
+Usun_liczby(ACol,ARow,StringGrid1);
+Usun_litery(ACol,ARow,StringGrid1);
+Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
+
+Akolumna=ACol;
+Awiersz=ARow;
+}
+//---------------------------------------------------------------------------
 
 
