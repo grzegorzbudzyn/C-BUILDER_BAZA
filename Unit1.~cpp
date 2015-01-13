@@ -3,10 +3,10 @@
 #include <vcl.h>
 #pragma hdrstop
 #include <locale>
-
+#include <sstream>
 #include "Unit1.h"
 #include "Unit2.h"
-
+#include <string.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -293,7 +293,7 @@ int __fastcall CustomSortIncrease(TStringList *Lista, int idx1, int idx2)
  return CompareText(cTemp1, cTemp2);
 }
 
-void __fastcall sortuj(TStringGrid *Grid, int Col)
+void __fastcall sortujtekst(TStringGrid *Grid, int Col)
 {
  TStringList *SortList = new TStringList;
  String temp = "";
@@ -319,35 +319,70 @@ void __fastcall sortuj(TStringGrid *Grid, int Col)
  temp = "";
  for(int i = 0; i < SortList->Count; i++)
  {
-  temp = SortList->Strings[i];
+        temp = SortList->Strings[i];
 
-  int y = temp.Pos("^");
-  Grid->Cells[Col][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
-  temp = temp.Delete(1, y);
-  int z;
-  for(z = Grid->FixedCols; z < Grid->ColCount; z++)
-  {
-   if(z != Col)
-   {
-    y = temp.Pos("^");
-    Grid->Cells[z][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
-    temp = temp.Delete(1, y);
-   }
-  }
-  z++;
-  y = temp.Pos("^");
-  Grid->Cells[z][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
-  temp = temp.Delete(1, y);
+        int y = temp.Pos("^");
+        Grid->Cells[Col][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
+        temp = temp.Delete(1, y);
+        int z;
+        for(z = Grid->FixedCols; z < Grid->ColCount; z++)
+        {
+                if(z != Col)
+                {
+                        y = temp.Pos("^");
+                        Grid->Cells[z][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
+                        temp = temp.Delete(1, y);
+                }
+        }
+        z++;
+        y = temp.Pos("^");
+        Grid->Cells[z][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
+        temp = temp.Delete(1, y);
  }
+ }
+ //int __fastcall konwersjastringint(AnsiString s)
+ //{
+          
+ //         return 0;
+        //turn  s.ToInt();
+ //}
 
- delete SortList;
-}                //temp = Grid->Rows[i]->GetText();
-                //Grid->Rows[i]->SetText(Grid->Rows[j]->GetText());
-                //Grid->Rows[j]->SetText(temp.c_str());
+ void __fastcall sortujliczby(TStringGrid *Grid, int Col)
+ {
+        String pom = "";
+        for(int i=Grid->FixedRows;i<Grid->RowCount;i++)
+        {
+
+                for(int j=Grid->FixedRows;j<Grid->RowCount-1;j++) //pêtla wewnêtrzna
+                {
+                        int A = Grid->Cells[Col][j].ToInt();
+                        int B = Grid->Cells[Col][j+1].ToInt();
+                        if(A>B)
+                        {
+                        //zamiana miejscami
+                              // for (int z = Grid->FixedRows; z < Grid->ColCount;z++)
+                               // {
+                                          //pom[z] = Grid->Cells[z][j];
+                                          //Grid->Cells[z][j] = Grid->Cells[z][j+1];
+                                          //Grid->Cells[z][j+1] = pom[z];
+                                          pom = Grid->Rows[j]->GetText();
+                                          Grid->Rows[j]->SetText(Grid->Rows[j+1]->GetText());
+                                          Grid->Rows[j+1]->SetText(pom.c_str());
+                               // }
+                        }
+                }
+        }
+        
+}
+
 
 void __fastcall TForm1::ComboBox1Change(TObject *Sender)
 {
-        sortuj(StringGrid1,ComboBox1->ItemIndex);
+        if (StringGrid1->Cells[ComboBox1->ItemIndex][1]=="tekst")
+                sortujtekst(StringGrid1,ComboBox1->ItemIndex);
+        else
+                if (StringGrid1->Cells[ComboBox1->ItemIndex][1]=="liczba")
+                        sortujliczby(StringGrid1,ComboBox1->ItemIndex);
 }
 //---------------------------------------------------------------------------
 //sortowanie end
@@ -377,5 +412,9 @@ Akolumna=ACol;
 Awiersz=ARow;
 }
 //---------------------------------------------------------------------------
+
+
+
+
 
 

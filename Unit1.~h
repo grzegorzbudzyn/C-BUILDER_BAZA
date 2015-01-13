@@ -57,7 +57,7 @@ __published:	// IDE-managed Components
         void __fastcall ComboBox1Change(TObject *Sender);
         void __fastcall StringGrid1SelectCell(TObject *Sender, int ACol,
           int ARow, bool &CanSelect);
-        
+
 
 
 
@@ -70,6 +70,7 @@ public:		// User declarations
         int Awiersz;
         
         __fastcall TForm1(TComponent* Owner);
+        //AnsiString __fastcall StrToInt(AnsiString s);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;
