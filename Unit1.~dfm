@@ -34,7 +34,7 @@ object Form1: TForm1
     FixedCols = 0
     RowCount = 3
     FixedRows = 2
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing, goAlwaysShowEditor]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goColMoving, goEditing]
     TabOrder = 0
     OnSelectCell = StringGrid1SelectCell
     OnSetEditText = StringGrid1SetEditText

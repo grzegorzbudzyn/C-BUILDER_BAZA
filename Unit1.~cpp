@@ -322,7 +322,7 @@ void __fastcall sortuj(TStringGrid *Grid, int Col)
   temp = SortList->Strings[i];
 
   int y = temp.Pos("^");
-  Grid->Cells[Col][i + 1] = temp.SubString(1, y - 1).Trim();
+  Grid->Cells[Col][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
   temp = temp.Delete(1, y);
   int z;
   for(z = Grid->FixedCols; z < Grid->ColCount; z++)
@@ -330,13 +330,13 @@ void __fastcall sortuj(TStringGrid *Grid, int Col)
    if(z != Col)
    {
     y = temp.Pos("^");
-    Grid->Cells[z][i + 1] = temp.SubString(1, y - 1).Trim();
+    Grid->Cells[z][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
     temp = temp.Delete(1, y);
    }
   }
   z++;
   y = temp.Pos("^");
-  Grid->Cells[z][i + 1] = temp.SubString(1, y - 1).Trim();
+  Grid->Cells[z][i + Grid->FixedRows] = temp.SubString(1, y - 1).Trim();
   temp = temp.Delete(1, y);
  }
 
@@ -360,7 +360,7 @@ ComboBox1->Items->Clear();
 for(int i = 0; i < StringGrid1->ColCount; i++)
         {
                 ComboBox1->Items->Add(StringGrid1->Cells[i][0]);
-      }
+        }
 }
 //---------------------------------------------------------------------------
 
