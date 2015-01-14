@@ -10,6 +10,11 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+struct Szukana
+            {
+            int Row;
+            int Col;
+            }szukana;
 TForm1 *Form1;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -17,8 +22,9 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 {
   Baza = new TDataBase();
   FileSaveName = "";
+  szukana.Col = 0;
+  szukana.Row = 2;
 
-  
 }
 //---------------------------------------------------------------------------
 void Usun_liczby(int Akolumna,int Awiersz,TStringGrid *Grid)   //maska usuwajaca liczby
@@ -204,38 +210,30 @@ Usun_litery(Akolumna,Awiersz,StringGrid1);
   FileSaveName = SaveDialog1->FileName;  
 }
 //wyszukiwanie
-struct FindCells
-{
- int Row;
- int Col;
-};
-FindCells FindInGrid(TStringGrid *Grid, String tekst)
-{
- FindCells fc;
- fc.Col = -1;
- fc.Row = -1;
 
- static int row = Grid->FixedRows;
- if(row >= Grid->RowCount - 1)
- row = Grid->FixedRows;
+bool FindInGrid(TStringGrid *Grid, AnsiString tekst)
+{
 
- for(int i = Grid->FixedCols; i < Grid->ColCount; i++)
- {
-  for(int j = row; j < Grid->RowCount; j++)
-  {
-   String find = Grid->Cells[i][j];
-   int x = find.Pos(tekst);
-   if(x > 0)
-   {
-    fc.Col = i;
-    fc.Row = j;
-    row = j + 1;
-    return fc;
-   }
-  }
- }
- row = Grid->FixedRows;
- return fc;
+
+            for(int i=szukana.Col;i<Grid->RowCount;i++)
+        {
+
+                for(int j=szukana.Row;j<Grid->RowCount;j++) //pêtla wewnêtrzna
+                {
+                        AnsiString TEMP = Grid->Cells[i][j];
+                        TEMP.AnsiCompare(tekst);
+                        if(TEMP.AnsiCompare(tekst)==0)
+                        {
+                              szukana.Col=i;
+                              szukana.Row=j;
+                              return true;
+                        }
+                }
+        }
+
+      szukana.Col=0;
+      szukana.Row=2;
+      return false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
@@ -246,17 +244,29 @@ void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
 //przycisk wyszukania
 void __fastcall TForm1::WyszukajClick(TObject *Sender)
 {
-    FindCells fc;
- fc = FindInGrid(StringGrid1, Edit1->Text);
- if(fc.Col < 0)
+
+ bool Znaleziono = FindInGrid(StringGrid1, Edit1->Text);
+ if(!Znaleziono)
  {
   Application->MessageBox(("Nie mo¿na odnaleŸæ „" + Edit1->Text + "”").c_str(),
    "ZnajdŸ", MB_OK | MB_ICONINFORMATION);
+  szukana.Col=0;
+  szukana.Row=2;
   return;
  }
- StringGrid1->Col = fc.Col;
- StringGrid1->Row = fc.Row;
+ StringGrid1->Col = szukana.Col;
+ StringGrid1->Row = szukana.Row;
  StringGrid1->SetFocus();
+
+ if (szukana.Row < StringGrid1->RowCount)
+ {
+      szukana.Row++;
+ }
+ else
+ {
+      szukana.Row = StringGrid1->FixedRows;
+      szukana.Col++;
+ }
 
 }
 

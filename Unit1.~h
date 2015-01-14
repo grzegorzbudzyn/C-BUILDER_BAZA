@@ -70,6 +70,8 @@ public:		// User declarations
         int Awiersz;
         
         __fastcall TForm1(TComponent* Owner);
+
+         
         //AnsiString __fastcall StrToInt(AnsiString s);
 };
 //---------------------------------------------------------------------------
