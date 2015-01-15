@@ -31,6 +31,10 @@ object Form1: TForm1
     Width = 609
     Height = 369
     ColCount = 2
+    Constraints.MaxHeight = 369
+    Constraints.MaxWidth = 609
+    Constraints.MinHeight = 369
+    Constraints.MinWidth = 609
     FixedCols = 0
     RowCount = 3
     FixedRows = 2
