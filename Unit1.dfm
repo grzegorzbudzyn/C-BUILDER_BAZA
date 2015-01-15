@@ -2,8 +2,9 @@ object Form1: TForm1
   Left = 375
   Top = 166
   ActiveControl = StringGrid1
+  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Form1'
+  Caption = 'E-BAZA'
   ClientHeight = 443
   ClientWidth = 624
   Color = clBtnFace
