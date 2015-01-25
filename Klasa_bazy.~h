@@ -5,10 +5,7 @@
 //---------------------------------------------------------------------------
 #include <Grids.hpp>
 //---------------------------------------------------------------------------
-struct memo //struktura sluzy do przenoszenia informacji pomiedzy formularzem i klasa bazy
-{
-        String A[1000];
-};
+
 class TDataBase
 {
  public:

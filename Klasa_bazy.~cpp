@@ -13,6 +13,7 @@ TDataBase::TDataBase()
 //---------------------------------------------------------------------------
 TDataBase::~TDataBase()
 {   // destruktor
+      delete Memo;
 }
 //---------------------------------------------------------------------------
 String TDataBase::SetColSize(int Cols, TStringGrid *Grid)
@@ -174,7 +175,7 @@ memo TDataBase::GetMemo(int number)
 
 void TDataBase::RefreshBase(void)
 {
- Bitmap->Clear();
+
  Memo->Clear();
 }
 //---------------------------------------------------------------------------

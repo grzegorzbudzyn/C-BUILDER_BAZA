@@ -53,6 +53,8 @@ void Usun_litery(int Akolumna,int Awiersz,TStringGrid *Grid)   //maska usuwajaca
 }
 void __fastcall TForm1::DodajWiersz1Click(TObject *Sender)
 {
+      Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
     StringGrid1->RowCount++;
 }
 //---------------------------------------------------------------------------
@@ -131,21 +133,29 @@ void __fastcall DeleteCol(TStringGrid *Grid, int ACol)
 //--------------------
 void __fastcall TForm1::UsuWiersz1Click(TObject *Sender)
 {
+      Usun_liczby(Akolumna,Awiersz,StringGrid1);
+      Usun_litery(Akolumna,Awiersz,StringGrid1);
     DeleteRow(StringGrid1, StringGrid1->Row);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::DodajKolumn1Click(TObject *Sender)
 {
+      Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
       StringGrid1->ColCount++;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::UsuKolumn1Click(TObject *Sender)
 {
+      Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
          DeleteCol(StringGrid1, StringGrid1->Col);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::NagwkiKolumn1Click(TObject *Sender)
 {
+      Usun_liczby(Akolumna,Awiersz,StringGrid1);
+      Usun_litery(Akolumna,Awiersz,StringGrid1);
         Form2->ShowModal();
 }
 //---------------------------------------------------------------------------
@@ -155,6 +165,8 @@ void __fastcall TForm1::NagwkiKolumn1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Nowy1Click(TObject *Sender)
 {
+Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
 if( Application->MessageBox(
 			"Czy jestes pewien? Nie zapisane dane zostan¹ bezpowrotnie utracone!",
 			"Ostrze¿enie",
@@ -176,6 +188,9 @@ Baza->RefreshBase();
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Otwrz1Click(TObject *Sender)
 {
+Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
+
  if(OpenDialog1->Execute())
     {
       Baza->RefreshBase();
@@ -188,6 +203,7 @@ void __fastcall TForm1::Otwrz1Click(TObject *Sender)
 void __fastcall TForm1::Zapisz1Click(TObject *Sender)
 {
 Usun_liczby(Akolumna,Awiersz,StringGrid1);
+Usun_litery(Akolumna,Awiersz,StringGrid1);
 
         if(FileSaveName.IsEmpty())
         {

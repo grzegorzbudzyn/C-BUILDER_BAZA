@@ -1,26 +1,26 @@
-Nr kontenera#Rodzaj kontenera#Pojemnoœæ(m3)#Miejsce produkcji#Miejsce sk³adowania
+ID kontenera#Rodzaj kontenera#Pojemnoœæ(m3)#Miejsce produkcji#Miejsce sk³adowania
 liczba#tekst#liczba#tekst#tekst
-156246#Budowalny#33#Katowice#Gdañsk
-478913#Socjalny#66#Miko³ów#Zakopane
-487961#Handlowy#33#£aziska#Rzeszów
-789612#Us³ugowy#99#Katowice#Kraków
+1267#Portiernia#16#Miko³ów#Gdañsk
+915#Stró¿ówka#18#£aziska#Bydgoszcz
+4621789#Stró¿ówka#18#Rybnik#Bydgoszcz
+2234#Portiernia#32#Rybnik#Rybnik
+7789#Socjalny#33#Miko³ów#Katowice
+9812#Handlowy#33#Miko³ów#Katowice
 15466#Magazynowy#33#Katowice#Kraków
 99512#Magazynowy#33#Miko³ów#Miko³ów
+156246#Budowalny#33#Katowice#Gdañsk
+156483#Magazynowy#33#Miko³ow#Toruñ
+156792#Magazynowy#33#Orzesze#Katowice
+468793#Magazynowy#33#Orzesze#Warszawa
+487961#Handlowy#33#£aziska#Rzeszów
+721679#Magazynowy#33#Orzesze#Katowice
+15679#Magazynowy#66#Rybnik#Katowice
+156789#Handlowy#66#Katowice#Kraków
+165793#Handlowy#66#£aziska#Gdañsk
+478913#Socjalny#66#Miko³ów#Zakopane
+186126#Socjalny#78#Orzesze#Wis³a
+789612#Us³ugowy#99#Katowice#Kraków
 156123#Handlowy#122#Miko³ów#Opole
 8926#Kompleks biznesowy#188#£aziska#Wroc³aw
-186126#Socjalny#78#Orzesze#Wis³a
-468793#Magazynowy#33#Orzesze#Warszawa
-156483#Magazynowy#33#Miko³ow#Toruñ
-156789#Handlowy#66#Katowice#Kraków
-1267#Portiernia#16#Miko³ów#Gdañsk
-2234#Portiernia#32#Rybnik#Rybnik
-4621789#Stró¿ówka#18#Rybnik#Bydgoszcz
-915#Stró¿ówka#18#£aziska#Bydgoszcz
-165793#Handlowy#66#£aziska#Gdañsk
-9812#Handlowy#33#Miko³ów#Katowice
-7789#Socjalny#33#Miko³ów#Katowice
-721679#Magazynowy#33#Orzesze#Katowice
-156792#Magazynowy#33#Orzesze#Katowice
-15679#Magazynowy#66#Rybnik#Katowice
 [SECTION MEMO]
 85#103#78#92#106

@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 375
-  Top = 166
+  Left = 374
+  Top = 160
   ActiveControl = StringGrid1
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
