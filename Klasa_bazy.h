@@ -5,10 +5,10 @@
 //---------------------------------------------------------------------------
 #include <Grids.hpp>
 //---------------------------------------------------------------------------
-struct memo //struktura sluzy do przenoszenia informacji pomiedzy formularzem i klasa bazy
-{
-        String A[1000];
-};
+//struct memo //struktura sluzy do przenoszenia informacji pomiedzy formularzem i klasa bazy
+//{
+//        String A[1000];
+//};
 class TDataBase
 {
  public:
@@ -19,8 +19,6 @@ class TDataBase
  void LoadFromFile(String FileName, TStringGrid *Grid);
  void SetMemo(String tekst, int number);
 
- memo GetMemo(int number);
- 
  void RefreshBase(void);
  int MemoCount;
 

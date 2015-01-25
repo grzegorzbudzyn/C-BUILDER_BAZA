@@ -134,43 +134,7 @@ void TDataBase::SetMemo(String tekst, int number)
                                      }
  if(!test)Memo->Add(temp + tekst);
 }
-//---------------------------------------------------------------------------
-int TDataBase::WierszeMemo(String tekst)
-{
- int x = 0;
- for(int i = 0; i < tekst.Length(); i++){
-     x = (tekst.SubString(i, 1) == "|") ? x + 1 : x;
-                                        }
- return x;
-}
-//---------------------------------------------------------------------------
-memo TDataBase::GetMemo(int number)
-{
- String temp;
- memo zwrot;
- int z;
 
- for(int i = 0; i < Memo->Count; i++){
-     temp = Memo->Strings[i].SubString(7, 1000);
-     int x = temp.LastDelimiter("#");
-     try{z = (temp.SubString(0, x - 1)).ToInt();}catch(...){z = 0;}
-     if(z == number){
-     temp = temp.Delete(1, x);
-     break;
-                    }
-                                     }
- if(z == number){
- 
- MemoCount = WierszeMemo(temp);
-
- for(int i = 0; i < MemoCount; i++){
-     int x = temp.LastDelimiter("|");
-     zwrot.A[i] = (temp.SubString(x + 1, 1000));
-     temp = temp.Delete(x, 1000);
-                                           }
-               }
- return zwrot;
-}
 //---------------------------------------------------------------------------
 
 void TDataBase::RefreshBase(void)
