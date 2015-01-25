@@ -13,6 +13,7 @@ TDataBase::TDataBase()
 //---------------------------------------------------------------------------
 TDataBase::~TDataBase()
 {   // destruktor
+      delete Memo;
 }
 //---------------------------------------------------------------------------
 String TDataBase::SetColSize(int Cols, TStringGrid *Grid)
